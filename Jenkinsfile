@@ -7,7 +7,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                foo
+                script {
+                    foo()
+                }
             }
         }
         stage('Test') {
