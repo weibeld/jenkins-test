@@ -1,9 +1,13 @@
+def foo() {
+    echo "foo"
+}
+
 pipeline {
     agent any
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                foo
             }
         }
         stage('Test') {
