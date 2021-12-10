@@ -1,5 +1,8 @@
 def foo(chartName, chartDir) {
-    echo "foo"
+    sh """
+        echo $chartName
+        echo $chartDir/Chart.yaml
+    """
 }
 
 pipeline {
