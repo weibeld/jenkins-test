@@ -1,4 +1,4 @@
-def foo() {
+def foo(chartName, chartDir) {
     echo "foo"
 }
 
@@ -7,9 +7,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                script {
-                    foo()
-                }
+                foo("mychart", "/mydir/charts/mychart")
             }
         }
         stage('Test') {
