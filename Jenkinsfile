@@ -1,14 +1,15 @@
 def foo(chartName, chartDir) {
     sh """#!/bin/bash
-        chart_name="$chartName"
-        echo "\$chart_name"
-        sleep 10
-        echo "\$chart_name"
+    echo "\$foo"
+    echo "$foo"
     """
 }
 
 pipeline {
     agent any
+    environment {
+        foo = "bar"
+    }
     stages {
         stage('Parallel') {
             parallel {
@@ -19,7 +20,6 @@ pipeline {
                 }
                 stage('Stage 2') {
                     steps {
-                        sh 'sleep 5'
                         foo("stage2", "/mydir/charts/mychart")
                     }
                 }
