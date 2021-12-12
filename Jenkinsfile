@@ -1,6 +1,8 @@
 def foo(chartName, chartDir) {
-    sh """
+    sh """#!/bin/bash
         chart_name="$chartName"
+        echo "\$chart_name"
+        sleep 10
         echo "\$chart_name"
     """
 }
@@ -17,6 +19,7 @@ pipeline {
                 }
                 stage('Stage 2') {
                     steps {
+                        sh 'sleep 5'
                         foo("stage2", "/mydir/charts/mychart")
                     }
                 }
