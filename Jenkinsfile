@@ -1,29 +1,25 @@
 def foo(chartName, chartDir) {
     sh """
-        chartName="$chartName"
-        chartDir="$chartDir"
-        chartDir=\${chartDir%/}
-        echo "\$chartDir"/Chart.yaml
+        chart_name="$chartName"
+        echo "\$chart_name"
     """
 }
 
 pipeline {
     agent any
     stages {
-        stage('Build') {
-            steps {
-                foo("mychart", "/mydir/charts/mychart")
-                foo("mychart", "/mydir/charts/mychart/")
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+        stage('Parallel') {
+            parallel {
+                stage('Stage 1') {
+                    steps {
+                        foo("stage1", "/mydir/charts/mychart")
+                    }
+                }
+                stage('Stage 2') {
+                    steps {
+                        foo("stage2", "/mydir/charts/mychart")
+                    }
+                }
             }
         }
     }
