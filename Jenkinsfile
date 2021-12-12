@@ -1,7 +1,9 @@
 def foo(chartName, chartDir) {
     sh """
-        echo $chartName
-        echo $chartDir/Chart.yaml
+        chartName="$chartName"
+        chartDir="$chartDir"
+        chartDir=\${chartDir%/}
+        echo "\$chartDir"/Chart.yaml
     """
 }
 
@@ -11,6 +13,7 @@ pipeline {
         stage('Build') {
             steps {
                 foo("mychart", "/mydir/charts/mychart")
+                foo("mychart", "/mydir/charts/mychart/")
             }
         }
         stage('Test') {
