@@ -15,12 +15,12 @@ pipeline {
             parallel {
                 stage('Stage 1') {
                     steps {
-                        foo("stage1", "foo")
+                        foo("stage1")
                     }
                 }
                 stage('Stage 2') {
                     steps {
-                        foo("stage2", "foo")
+                        foo("stage2")
                     }
                 }
             }
