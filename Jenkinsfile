@@ -1,7 +1,7 @@
 def foo(chartName, chartDir) {
     sh """#!/bin/bash
-    echo "\$foo"
-    echo "$foo"
+    echo "$chartName"
+    echo "$chartDir"
     """
 }
 
@@ -15,12 +15,12 @@ pipeline {
             parallel {
                 stage('Stage 1') {
                     steps {
-                        foo("stage1", "/mydir/charts/mychart")
+                        foo("stage1")
                     }
                 }
                 stage('Stage 2') {
                     steps {
-                        foo("stage2", "/mydir/charts/mychart")
+                        foo("stage2")
                     }
                 }
             }
