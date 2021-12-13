@@ -1,5 +1,7 @@
-def foo(chartName, chartDir) {
+def foo(chartName, chartDir=null) {
     sh """#!/bin/bash
+    chart_name="$chartName"
+    chart_dir="$chartDir"
     echo "$chartName"
     echo "$chartDir"
     """
@@ -20,7 +22,7 @@ pipeline {
                 }
                 stage('Stage 2') {
                     steps {
-                        foo("stage2")
+                        foo("stage2", "foo")
                     }
                 }
             }
